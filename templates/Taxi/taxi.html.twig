@@ -1,0 +1,37 @@
+{% extends "Taxi/baseTaxi.html.twig" %}
+
+{% block contenido %}
+            <div class="container">
+                <div class="row">
+                    <div class="col text-center"><h2>{{taxi.marca}} modelo {{taxi.nombre}}</h2></div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <img src="{{taxi.modelo}}">
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col">
+                                {% if taxi.activo == 1 %}
+                                    Disponible
+                                {% elseif taxi.activo == 0 %}
+                                    No disponible actualmente
+                                {% endif %}
+                            </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <ul>
+                               <div class="col">{{taxi.velocidad}}
+                            </ul>
+                            <ul>
+                               <div class="col">{{taxi.propietario}}
+                            </ul>
+                            <ul>
+                               <div class="col">{{taxi.localizacion}}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+{% endblock %}
