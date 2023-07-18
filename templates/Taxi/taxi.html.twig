@@ -1,35 +1,35 @@
 {% extends "Taxi/baseTaxi.html.twig" %}
 
 {% block contenido %}
-            <div class="container">
-                <div class="row">
-                    <div class="col text-center"><h2>{{taxi.marca}} modelo {{taxi.nombre}}</h2></div>
+            <div class="col-md-16">
+                <div class="card mb-4">
+                    <div class="containerimagen"><h2>{{taxi.marca}} modelo {{taxi.nombre}}</h2></div>
                 </div>
                 <div class="row">
-                    <div class="col">
-                        <img src="{{taxi.modelo}}">
+                    <div>
+                        <img class="imggrande" src="{{taxi.modelo}}">
                     </div>
                     <div class="col">
-                        <div class="row">
-                            <div class="col">
+                       
+                   
+                          
+                        <div class="enfasisamarillop">Su velocidad máxima es de {{taxi.velocidad}}km/h
+                        </div>
+                    
+                        <div class="enfasisamarillop">El nombre de su dueño es {{taxi.propietario}}
+                        </div>
+                    
+                        <div class="enfasisamarillop">Podrás llamar a este taxi si te encuentras en las inmediaciones de {{taxi.localizacion}}
+                        </div>
+
+                        <div class="enfasisamarillopultimo">
                                 {% if taxi.activo == 1 %}
-                                    Disponible
+                                    Este taxi se encuentra Disponible
                                 {% elseif taxi.activo == 0 %}
                                     No disponible actualmente
                                 {% endif %}
-                            </div>
-                            </div>
                         </div>
-                        <div class="row">
-                            <ul>
-                               <div class="col">{{taxi.velocidad}}
-                            </ul>
-                            <ul>
-                               <div class="col">{{taxi.propietario}}
-                            </ul>
-                            <ul>
-                               <div class="col">{{taxi.localizacion}}
-                            </ul>
+                    
                         </div>
                     </div>
                 </div>

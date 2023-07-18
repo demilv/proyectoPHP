@@ -7,6 +7,8 @@ use App\Form\TaxiType;
 use App\Manager\CocheManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,6 +17,13 @@ use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class TaxiController extends AbstractController {
+
+    #[Route("/inicio", name:"inicio")]
+    public function inicio() {  
+
+     return $this->render("Taxi/inicio.html.twig");
+    }
+
 
     #[Route("/taxi/{id}", name:"getTaxi")]
     public function getTaxi(EntityManagerInterface $doctrine, $id) {
@@ -54,7 +63,7 @@ class TaxiController extends AbstractController {
 
     #[Route("/edit/taxi/{id}", name:"editTaxi")]
     //#[IsGranted("ROLE_ADMIN")]
-    public function editTaxi(EntityManagerInterface $doctrine, Request $request, $id) {
+    public function editTaxi(EntityManagerInterface $doctrine, Request $request, CocheManager $manager, $id) {
 
         $repository = $doctrine->getRepository(Taxi::class);
         $taxi = $repository->find($id);
@@ -64,6 +73,14 @@ class TaxiController extends AbstractController {
         if($form->isSubmitted()and $form->isValid())
         {
             $taxi=$form->getData();
+            $taxiImage = $form->get('modelo')->getData();
+            if($taxiImage)
+            {
+                $imageUrl = $manager->uploadImage($taxiImage, $this->getParameter('kernel.project_dir').'/public/images');
+                $taxi->setModelo($imageUrl);
+                
+            }
+
             $doctrine->persist($taxi);
             $doctrine->flush();
             return $this->redirectToRoute('listTaxis');
@@ -86,6 +103,25 @@ class TaxiController extends AbstractController {
 
         return $this->render("Taxi/listTaxis.html.twig",["taxis"=>$taxis]);
     }
+
+
+#[Route('/taxi/delete/{id}', name: 'deleteTaxi')]
+public function deleteTaxi($id, EntityManagerInterface $entityManager)
+{
+    $repository = $entityManager->getRepository(Taxi::class);
+    $taxi = $repository->find($id);
+
+    if (!$taxi) {
+        return $this->redirectToRoute('listTaxis');
+    }
+
+    $entityManager->remove($taxi);
+    $entityManager->flush();
+
+    return $this->redirectToRoute('listTaxis');
+}
+
+    
 
     #[Route("/new/taxi")]
     public function newTaxi(EntityManagerInterface $doctrine)
@@ -128,5 +164,30 @@ class TaxiController extends AbstractController {
 
         // return new Response("Estoy en la home");
     }
+
+    #[Route("/call/taxis", name: "callTaxis")]
+    public function callTaxis(Request $request, EntityManagerInterface $doctrine)
+    {
+        $repository = $doctrine->getRepository(Taxi::class);
+        $taxis = $repository->findAll();
+    
+        if ($request->isMethod('POST')) {
+            $localizacion = $request->request->get('localizacion');
+    
+            $taxiEncontrado = Taxi::buscarTaxiActivoEnZona($localizacion, $repository);
+    
+            if ($taxiEncontrado) {
+                $mensaje = 'Le enviaremos un taxi a su zona.';
+            } else {
+                $mensaje = 'No hay taxis disponibles en su zona.';
+            }
+        } else {
+            $mensaje = null;
+        }
+    
+        return $this->render("Taxi/findTaxis.html.twig", ["taxis" => $taxis, "mensaje" => $mensaje]);
+    }
+    
+
 
 }

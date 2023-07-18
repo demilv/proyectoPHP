@@ -1,0 +1,114 @@
+body {
+    background-color: black; 
+  }
+
+  .amarillop {
+    color:rgb(229, 222, 13);
+    text-align:center
+  }
+
+  .amarillopsinalign{
+    color:rgb(229, 222, 13)
+  }
+
+  .enfasisamarillop{
+    color:rgb(229, 222, 13);
+    text-align:center;
+    padding-top: 2%;
+    font-size: 18px;
+  }
+
+  .enfasisamarillopultimo{
+    color:rgb(229, 222, 13);
+    text-align:center;
+    padding-top: 2%;
+    font-size: 18px;
+    padding-bottom:6%
+  }
+
+  .naranjah2 {
+    color:rgb(229, 107, 13);
+    padding-top: 25%;
+    font-size: 28px;
+    text-align:center
+  }
+
+.encabezado {
+    height: 25vh; 
+    background-image: url("../images/17ed7b1e1a9d40e23b5fdc25894fb8f4.jpg");
+    background-size: 100%; 
+    background-repeat: no-repeat;
+    background-position: center center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .container {
+    height: calc(85vh - 56px);
+    width: calc(85vh - 56px); 
+    overflow-y: auto; 
+  }
+
+  .containerimagen{
+    background-color: black;
+    text-align:center;
+    color:aqua;
+    height:5%
+  }
+
+  .imggrande{
+    max-width: 100%;
+    height: auto;
+  }
+
+  .footerdiv{
+    display:flex;
+    flex-direction: row;    
+    justify-content: center;
+}
+.info{
+    padding-right: 5%;
+    font-size: 10px;
+}
+.backcolor{
+    background-color: black;
+    color: white;
+}
+
+.otrocolor{
+    background-color: bisque;
+}
+
+.card-title{
+    color:aqua;
+    text-align:center
+}
+
+.no-imagen{
+    text-align: center;
+    color:rgb(243, 118, 40)
+}
+
+.card-body{
+    text-align: center;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
+.card-title2{
+    color: aquamarine;
+}
+  
+.card-text{
+    color:rgb(155, 122, 173);
+}  
+.formvioleta{
+    color: violet;
+}
+
+
+
+  

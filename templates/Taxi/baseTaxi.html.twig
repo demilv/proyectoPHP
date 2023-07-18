@@ -3,25 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     <title>{% block title %}Welcome!{% endblock %}</title>
     {% block stylesheets %}{% endblock %}
 </head>
 <body>
+<div class="encabezado">
+  <h1>El proyecto de PHP que me va a dar una ulcera</h1>
+</div>
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#"><img height="35px" src="{# LOGO #}"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-link active" href="#">Inicio <span class="sr-only">(current)</span></a>
+            <div class="navbar-nav" id="myNavbar">
+                <a class="nav-link active" href="{{path('inicio')}}">Inicio <span class="sr-only">(current)</span></a>
                 <a class="nav-link" href="{{ path('listTaxis') }}">Listar Taxi</a>
                 <a class="nav-link" href="{{path('insertTaxi')}}">Crear Taxi</a>
+                <a class="nav-link" href="{{path('callTaxis')}}">Llama a tu Taxi</a>
             </div>
         </div>
     </nav>
     {% block contenido %}{% endblock%}
 </div>
+<div class="backcolor">
+    <div>
+      <div class="footerdiv">
+        <h3 class="info">Información de contacto</h3>
+        <p class="info">Teléfono: 123-456-789</p>
+        <p class="info">Email: SoyBatman@meh.com</p>
+        <p class="info">Dirección: Calle Tururu</p>
+      </div>
+      <div class="footerdiv">
+        <h3>Enlaces</h3>
+        <ul class="info">
+          <li><a href="#">Acerca de</a></li>
+          <li><a href="#">Servicios</a></li>
+          <li><a href="#">Contacto</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

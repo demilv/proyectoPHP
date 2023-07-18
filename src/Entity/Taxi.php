@@ -123,4 +123,11 @@ class Taxi
 
         return $this;
     }
+
+    public static function buscarTaxiActivoEnZona(string $localizacion, TaxiRepository $repository): bool
+    {
+        $taxi = $repository->findOneBy(['localizacion' => $localizacion, 'activo' => true]);
+
+        return $taxi !== null;
+    }
 }
